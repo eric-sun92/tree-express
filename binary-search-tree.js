@@ -134,6 +134,54 @@ class BinarySearchTree {
             return ans
         }
     }
+
+
+    remove(data){
+        function recursiveRemove(node, data) {
+
+            if(node === null) {
+                return null
+            }
+            else {
+                if(node.value === data){
+                    //no children
+                    if(node.left == null && node.right == null){
+                        console.log('test')
+                        return null
+                    }
+                    //no left child
+                    else if(node.left == null && node.right !== null){
+                        return node.right
+                    }
+                    //no right child
+                    else if(node.right == null && node.left !== null){
+                        return node.left
+                    }
+                    //both children exist
+                    else{
+                        let tempNode = node.right
+                        while(tempNode.left !== null){
+                            tempNode = tempNode.left
+                        }
+                        node.value = tempNode.value
+                        node.right = recursiveRemove(node.right, tempNode.value)
+                        return node
+                    }
+
+                }
+                else if(node.value < data){
+                    node.right = recursiveRemove(node.right, data)
+                    return node
+                }
+                else {
+                    node.left = recursiveRemove(node.left, data)
+                    return node
+                }
+
+            }
+        }
+        this.root = recursiveRemove(this.root, data)
+    }
 }
 
 
@@ -162,3 +210,6 @@ console.log(tree.max())
 
 console.log(tree.findValue(5))
 
+
+tree.remove(17)
+console.log(tree.breadthFirstSearch())

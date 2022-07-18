@@ -1,0 +1,56 @@
+Trees-data structure non-linear
+
+    -advantages  (lookup is faster log(n))
+    -add method:
+        -if root is null make it the root, else just keep iterating thru tree 
+            -if less than root.val and node.left isnt null, then pass node.left 
+                -if null then insert it
+            -if greater than root.val and node.right isnt null, then pass node.right
+                -if null then insert it
+            -until u get to a null and insert it correctly
+    -min/max method:
+        -iterate through the tree if root isnt null
+        -for min- go left, for max- go right until u hit a null then return the node.val
+    -findValue method: 
+        -iterate through the tree if root isnt null
+        -if val is equal to node.val then return true 
+        -else if val is less than node.val then check to see if val is greater than node.left (*note node.left shouldnt be null but i think thats self-explanatory check)
+            -if so then instant return false
+            -if not then recursively call the function on node.left
+        -basically do the same thing for if val is greater than node.val but reverse the operators
+        -keep going until u reach end if u reach null then ggs u return false, shouldve found the val in tree by then
+    -SEARCH FUNCTIONS*this one is kinda hard to understand but i think i got it in the end
+        -BFS (breadth first search - checks each node level or each nodes' leaves before moving to their childrens leaves)
+            -the idea of this is to use a queue and add the leaves to the queue iteratively until the queue is empty then ur done
+            -as u add to queue, u remove from queue in order and push it to answer array
+            implementation: -first check if root is null
+                -if not then push root to queue, then start the iteration
+                    -if queue lenth > 0 keep going, else ur done
+                    -shift the queue and push that into the ans array using a const var
+                    -then check to see if the node shifted node has children
+                        -if node.left exists then push it to the queue
+                        -if node.right exists then push it to queue
+        -DFS(depth first search - checks every child node before moving to next node)
+            -the idea of this one is to do is recursively pushing each left childnode, then each right childnode until right child is null
+            -create ans array
+            -if root isnt null, then start recusively calling a search function, passing in root node first
+                -push the passed in node to ans array
+                -if node.left isnt null then call the function on left node
+                -if node.right isnt null then call the function on right node
+            =>this recursively goes down the entire left side, then goes up until it hits a right node, then repeats
+            
+
+-binary search Trees (like a sorted tree)
+    -each node has only left and right children nodes
+    -each left node must be smaller than parent nodes
+    -each right node must be greater than parent nodes
+
+
+
+-sidenote *did a little backend practicing here
+    -learned about middleware using express (logging, next(), use, get, authentication, etc)
+    -learned about express basics (get/put/delete/post middleware)
+        -routing/advanced(dynamic) routing
+        -public/static files using express.static('public)
+        -logger middleware
+        -reqUrl and req.param using id and creating a variable to access that req.vairable later
